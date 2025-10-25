@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client"
-  output   = "../src/generated/prisma/client"
+  output   = "../src/generated/client"
 }
 
 datasource db {
@@ -26,7 +26,7 @@ model Board {
   title       String
   description String?
   startDate   DateTime
-  endTime     DateTime
+  endDate     DateTime
   columns     BoardColumn[]
   tickets     BoardTicket[]
 }
@@ -71,8 +71,8 @@ model Comment {
 model User {
   id              String        @id @default(cuid())
   name            String
-  email           String
-  emailVerified   Boolean
+  email           String        @unique
+  emailVerified   Boolean?
   image           String?
   comments        Comment[]
   assignedTickets BoardTicket[] @relation("assigned")
